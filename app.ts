@@ -7,10 +7,10 @@ const app = express();
 const authRoutes = require("./routes/Auth");
 const resetPasswordRoutes = require("./routes/User/User");
 
-const perfilAcessoRoutes = require("./routes/cadastro/PerfilAcesso");
-const produtoRoutes = require("./routes/cadastro/Produto");
-const statusRoutes = require("./routes/cadastro/Status");
-const usuarioRoutes = require("./routes/cadastro/Usuario");
+const perfilAcessoRoutes = require("./routes/Cadastro/PerfilAcesso");
+const produtoRoutes = require("./routes/Cadastro/Produto");
+const statusRoutes = require("./routes/Cadastro/Status");
+const usuarioRoutes = require("./routes/Cadastro/Usuario");
 
 const clienteIdentificacaoRoutes = require("./routes/Credenciamento/Cliente/Identificacao");
 const clienteLocalizacaoRoutes = require("./routes/Credenciamento/Cliente/Localizacao");

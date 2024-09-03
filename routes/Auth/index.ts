@@ -1,5 +1,5 @@
 import express from "express";
-import verifyToken from "../../token/verifytoken";
+import verifyToken from "../../token/verifyToken";
 
 const router = express.Router();
 const AuthController = require("../../controllers/Auth/Auth");
