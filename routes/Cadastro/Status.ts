@@ -2,7 +2,7 @@ import express from "express";
 import authToken from "../../middleware/authToken";
 
 const router = express.Router();
-const StatusController = require("../../controllers/Cadastro/Status");
+const StatusController = require("../../controllers/Cadastro/Statuss");
 
 router.use(authToken)
 
