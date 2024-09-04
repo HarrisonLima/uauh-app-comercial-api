@@ -1,7 +1,7 @@
 # Uauh - Aplicação Comercial API
 
-## For install dependences
+### For install dependences
 - npm install
 
-## For run
+### For run
 - npm start
