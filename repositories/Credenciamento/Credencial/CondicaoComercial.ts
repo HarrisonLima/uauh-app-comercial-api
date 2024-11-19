@@ -437,21 +437,18 @@ const deleteCondicaoComercial = async (
     console.log(condicaoComercial.rows[0]);
 
     const data = [
-      // condicaoComercial.rows[0]["id"],
-      // condicaoComercial.rows[0]["credencial_id"],
-      // condicaoComercial.rows[0]["produto_id"],
-      // condicaoComercial.rows[0]["produto"],
-      // condicaoComercial.rows[0]["tipo_pagamento"],
-      // condicaoComercial.rows[0]["faturamento"],
-      // condicaoComercial.rows[0]["rede"],
-      // condicaoComercial.rows[0]["saque_incluso"],
-      // condicaoComercial.rows[0]["apuracao"],
-      // condicaoComercial.rows[0]["pagamento"],
-      // condicaoComercial.rows[0]["taxa"],
-      // condicaoComercial.rows[0]["limite"],
-      // condicaoComercial.rows[0]["adesao"],
-      // condicaoComercial.rows[0]["emissao"],
-      // condicaoComercial.rows[0]["segunda_via"],
+      condicaoComercial.rows[0]["id"],
+      condicaoComercial.rows[0]["cnpj"],
+      condicaoComercial.rows[0]["nome_fantasia"],
+      condicaoComercial.rows[0]["produto"],
+      condicaoComercial.rows[0]["taxa"],
+      condicaoComercial.rows[0]["valor"],
+      condicaoComercial.rows[0]["valor_minimo"],
+      condicaoComercial.rows[0]["valor_maximo"],
+      condicaoComercial.rows[0]["carencia"],
+      condicaoComercial.rows[0]["parcelas"],
+      condicaoComercial.rows[0]["apuracao"],
+      condicaoComercial.rows[0]["pagamento"],
     ];
 
     query =

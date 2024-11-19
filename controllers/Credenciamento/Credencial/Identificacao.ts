@@ -1,8 +1,8 @@
-const IdentificacaoServices = require("../../../services/Credenciamento/Credencial/Identificacao");
+const IdentificacaoCredServices = require("../../../services/Credenciamento/Credencial/Identificacao");
 
-const insertIdentificacao = async (req: any, res: any): Promise<any> => {
+const insertCredIdentificacao = async (req: any, res: any): Promise<any> => {
   try {
-    const resultado = await IdentificacaoServices.insertIdentificacao([
+    const resultado = await IdentificacaoCredServices.insertCredIdentificacao([
       req.body,
       req.profileId,
     ]);
@@ -14,12 +14,12 @@ const insertIdentificacao = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const getIdentificacoes = async (
+const getCredIdentificacoes = async (
   _: any,
   res: any
 ): Promise<any | undefined> => {
   try {
-    const identificacoes = await IdentificacaoServices.getIdentificacoes();
+    const identificacoes = await IdentificacaoCredServices.getCredIdentificacoes();
     res.status(200).json(identificacoes);
   } catch (error) {
     error instanceof Error
@@ -28,10 +28,10 @@ const getIdentificacoes = async (
   }
 };
 
-const selectIdentificacao = async (req: any, res: any): Promise<any> => {
+const selectCredIdentificacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const identificacao = await IdentificacaoServices.selectIdentificacao(cnpj);
+    const identificacao = await IdentificacaoCredServices.selectCredIdentificacao(cnpj);
     if (!identificacao) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -43,10 +43,10 @@ const selectIdentificacao = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const updateIdentificacao = async (req: any, res: any): Promise<any> => {
+const updateCredIdentificacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const resultado = await IdentificacaoServices.updateIdentificacao(
+    const resultado = await IdentificacaoCredServices.updateCredIdentificacao(
       cnpj,
       [req.body, req.profileId]
     );
@@ -58,10 +58,10 @@ const updateIdentificacao = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const deleteIdentificacao = async (req: any, res: any): Promise<any> => {
+const deleteCredIdentificacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const deleted = await IdentificacaoServices.deleteIdentificacao(cnpj, req.profileId);
+    const deleted = await IdentificacaoCredServices.deleteCredIdentificacao(cnpj, req.profileId);
     if (deleted === false) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -75,9 +75,9 @@ const deleteIdentificacao = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  insertIdentificacao,
-  getIdentificacoes,
-  selectIdentificacao,
-  updateIdentificacao,
-  deleteIdentificacao,
+  insertCredIdentificacao,
+  getCredIdentificacoes,
+  selectCredIdentificacao,
+  updateCredIdentificacao,
+  deleteCredIdentificacao,
 };

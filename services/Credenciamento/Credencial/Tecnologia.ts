@@ -1,8 +1,8 @@
 import TecnologiaModel from "../../../models/Credenciamento/Credencial/Tecnologia";
 
-const TecnologiaRepository = require("../../../repositories/Credenciamento/Credencial/Tecnologia");
+const TecnologiaCredRepository = require("../../../repositories/Credenciamento/Credencial/Tecnologia");
 
-const insertTecnologia = async (req: any): Promise<any> => {
+const insertCredTecnologia = async (req: any): Promise<any> => {
   const tecnologia = new TecnologiaModel(
     req[0].credencial,
     req[0].equipamento_id,
@@ -10,21 +10,21 @@ const insertTecnologia = async (req: any): Promise<any> => {
     req[0].ec_equipamento
   );
   const userId = req[1];
-  return await TecnologiaRepository.insertTecnologia([tecnologia, userId]);
+  return await TecnologiaCredRepository.insertTecnologia([tecnologia, userId]);
 };
 
-const getTecnologias = async (): Promise<any | undefined> => {
+const getCredTecnologias = async (): Promise<any | undefined> => {
   const tecnologias =
-    await TecnologiaRepository.getTecnologias();
+    await TecnologiaCredRepository.getTecnologias();
   return tecnologias;
 };
 
-const selectTecnologia = async (cnpj: string): Promise<any> => {
-  const tecnologia = await TecnologiaRepository.selectTecnologia(cnpj);
+const selectCredTecnologia = async (cnpj: string): Promise<any> => {
+  const tecnologia = await TecnologiaCredRepository.selectTecnologia(cnpj);
   return tecnologia;
 };
 
-const updateTecnologia = async (cnpj: string, req: any): Promise<any> => {
+const updateCredTecnologia = async (cnpj: string, req: any): Promise<any> => {
   const tecnologia = new TecnologiaModel(
     req[0].credencial,
     req[0].equipamento_id,
@@ -32,16 +32,16 @@ const updateTecnologia = async (cnpj: string, req: any): Promise<any> => {
     req[0].ec_equipamento
   );
   const userId = req[1];
-  return await TecnologiaRepository.updateTecnologia(cnpj, [
+  return await TecnologiaCredRepository.updateTecnologia(cnpj, [
     tecnologia,
     userId,
   ]);
 };
 
-const deleteTecnologia = async (cnpj: string, req: any): Promise<any> => {
+const deleteCredTecnologia = async (cnpj: string, req: any): Promise<any> => {
   const equipamento_id = req[0];
   const userId = req[1];
-  const tecnologia = await TecnologiaRepository.deleteTecnologia(cnpj, [
+  const tecnologia = await TecnologiaCredRepository.deleteTecnologia(cnpj, [
     equipamento_id,
     userId,
   ]);
@@ -49,9 +49,9 @@ const deleteTecnologia = async (cnpj: string, req: any): Promise<any> => {
 };
 
 module.exports = {
-  insertTecnologia,
-  getTecnologias,
-  selectTecnologia,
-  updateTecnologia,
-  deleteTecnologia,
+  insertCredTecnologia,
+  getCredTecnologias,
+  selectCredTecnologia,
+  updateCredTecnologia,
+  deleteCredTecnologia,
 };

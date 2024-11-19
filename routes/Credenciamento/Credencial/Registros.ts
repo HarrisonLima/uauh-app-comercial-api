@@ -8,10 +8,10 @@ router.use(authToken);
 
 router.get(
   "/credenciamentos/credenciais/registros",
-  CredencialController.getRegistros
+  CredencialController.getCredRegistros
 );
 router.get(
   "/credenciamentos/credenciais/registros/:cnpj",
-  CredencialController.selectRegistros
+  CredencialController.selectCredRegistros
 );
 module.exports = router;

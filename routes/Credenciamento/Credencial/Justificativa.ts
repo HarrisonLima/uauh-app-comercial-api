@@ -6,9 +6,9 @@ const CredencialController = require("../../../controllers/Credenciamento/Creden
 
 router.use(authToken)
 
-router.post("/credenciamentos/credenciais/justificativas", CredencialController.insertJustificativa);
-router.get("/credenciamentos/credenciais/justificativas", CredencialController.getJustificativas);
-router.get("/credenciamentos/credenciais/justificativas/:cnpj", CredencialController.selectJustificativa);
-router.delete("/credenciamentos/credenciais/justificativas/:cnpj", CredencialController.deleteJustificativa);
+router.post("/credenciamentos/credenciais/justificativas", CredencialController.insertCredJustificativa);
+router.get("/credenciamentos/credenciais/justificativas", CredencialController.getCredJustificativas);
+router.get("/credenciamentos/credenciais/justificativas/:cnpj", CredencialController.selectCredJustificativa);
+router.delete("/credenciamentos/credenciais/justificativas/:cnpj", CredencialController.deleteCredJustificativa);
 
 module.exports = router;

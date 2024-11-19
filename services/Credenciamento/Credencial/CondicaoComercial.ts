@@ -1,8 +1,8 @@
 import CondicaoComercialModel from "../../../models/Credenciamento/Credencial/CondicaoComercial";
 
-const CondicacaoComercialRepository = require("../../../repositories/Credenciamento/Credencial/CondicaoComercial");
+const CondicacaoComercialCredRepository = require("../../../repositories/Credenciamento/Credencial/CondicaoComercial");
 
-const insertCondicaoComercial = async (req: any): Promise<any> => {
+const insertCredCondicaoComercial = async (req: any): Promise<any> => {
   const condicaoComercial = new CondicaoComercialModel(
     req[0].credencial,
     req[0].apuracao,
@@ -11,25 +11,25 @@ const insertCondicaoComercial = async (req: any): Promise<any> => {
     req[0].tarifa
   );
   const userId = req[1];
-  return await CondicacaoComercialRepository.insertCondicaoComercial([
+  return await CondicacaoComercialCredRepository.insertCondicaoComercial([
     condicaoComercial,
     userId,
   ]);
 };
 
-const getCondicoesComerciais = async (): Promise<any | undefined> => {
+const getCredCondicoesComerciais = async (): Promise<any | undefined> => {
   const condicoesComerciais =
-    await CondicacaoComercialRepository.getCondicoesComerciais();
+    await CondicacaoComercialCredRepository.getCondicoesComerciais();
   return condicoesComerciais;
 };
 
-const selectCondicaoComercial = async (cnpj: string): Promise<any> => {
+const selectCredCondicaoComercial = async (cnpj: string): Promise<any> => {
   const condicaoComercial =
-    await CondicacaoComercialRepository.selectCondicaoComercial(cnpj);
+    await CondicacaoComercialCredRepository.selectCondicaoComercial(cnpj);
   return condicaoComercial;
 };
 
-const updateCondicaoComercial = async (
+const updateCredCondicaoComercial = async (
   cnpj: string,
   req: any
 ): Promise<any> => {
@@ -41,13 +41,13 @@ const updateCondicaoComercial = async (
     req[0].tarifa
   );
   const userId = req[1];
-  return await CondicacaoComercialRepository.updateCondicaoComercial(cnpj, [
+  return await CondicacaoComercialCredRepository.updateCondicaoComercial(cnpj, [
     condicaoComercial,
     userId,
   ]);
 };
 
-const deleteCondicaoComercial = async (
+const deleteCredCondicaoComercial = async (
   cnpj: string,
   req: any
 ): Promise<any> => {
@@ -55,7 +55,7 @@ const deleteCondicaoComercial = async (
   const tipo_item = req[1];
   const userId = req[2];
   const condicaoComercial =
-    await CondicacaoComercialRepository.deleteCondicaoComercial(cnpj, [
+    await CondicacaoComercialCredRepository.deleteCondicaoComercial(cnpj, [
       item_id,
       tipo_item,
       userId,
@@ -64,9 +64,9 @@ const deleteCondicaoComercial = async (
 };
 
 module.exports = {
-  insertCondicaoComercial,
-  getCondicoesComerciais,
-  selectCondicaoComercial,
-  updateCondicaoComercial,
-  deleteCondicaoComercial,
+  insertCredCondicaoComercial,
+  getCredCondicoesComerciais,
+  selectCredCondicaoComercial,
+  updateCredCondicaoComercial,
+  deleteCredCondicaoComercial,
 };

@@ -1,8 +1,8 @@
 import IdentificacaoModel from "../../../models/Credenciamento/Credencial/Identificacao";
 
-const IdentificacaoRepository = require("../../../repositories/Credenciamento/Credencial/Identificacao");
+const IdentificacaoCredRepository = require("../../../repositories/Credenciamento/Credencial/Identificacao");
 
-const insertIdentificacao = async (req: any): Promise<any> => {
+const insertCredIdentificacao = async (req: any): Promise<any> => {
   const identificacao = new IdentificacaoModel(
     req[0].simplesNacional,
     req[0].cnpj,
@@ -16,23 +16,23 @@ const insertIdentificacao = async (req: any): Promise<any> => {
     req[0].matriz
   );
   const userId = req[1];
-  return await IdentificacaoRepository.insertIdentificacao([
+  return await IdentificacaoCredRepository.insertIdentificacao([
     identificacao,
     userId,
   ]);
 };
 
-const getIdentificacoes = async (): Promise<any | undefined> => {
-  const identificacoes = await IdentificacaoRepository.getIdentificacoes();
+const getCredIdentificacoes = async (): Promise<any | undefined> => {
+  const identificacoes = await IdentificacaoCredRepository.getIdentificacoes();
   return identificacoes;
 };
 
-const selectIdentificacao = async (cnpj: string): Promise<any> => {
-  const identificacao = await IdentificacaoRepository.selectIdentificacao(cnpj);
+const selectCredIdentificacao = async (cnpj: string): Promise<any> => {
+  const identificacao = await IdentificacaoCredRepository.selectIdentificacao(cnpj);
   return identificacao;
 };
 
-const updateIdentificacao = async (cnpj: string, req: any): Promise<any> => {
+const updateCredIdentificacao = async (cnpj: string, req: any): Promise<any> => {
   const identificacao = new IdentificacaoModel(
     req[0].simplesNacional,
     req[0].cnpj,
@@ -45,15 +45,15 @@ const updateIdentificacao = async (cnpj: string, req: any): Promise<any> => {
     req[0].emailFinanceiro
   );
   const userId = req[1];
-  return await IdentificacaoRepository.updateIdentificacao(cnpj, [
+  return await IdentificacaoCredRepository.updateIdentificacao(cnpj, [
     identificacao,
     userId,
   ]);
 };
 
-const deleteIdentificacao = async (cnpj: string, req: any): Promise<any> => {
+const deleteCredIdentificacao = async (cnpj: string, req: any): Promise<any> => {
   const userId = req;
-  const identificacao = await IdentificacaoRepository.deleteIdentificacao(
+  const identificacao = await IdentificacaoCredRepository.deleteIdentificacao(
     cnpj,
     userId
   );
@@ -61,9 +61,9 @@ const deleteIdentificacao = async (cnpj: string, req: any): Promise<any> => {
 };
 
 module.exports = {
-  insertIdentificacao,
-  getIdentificacoes,
-  selectIdentificacao,
-  updateIdentificacao,
-  deleteIdentificacao,
+  insertCredIdentificacao,
+  getCredIdentificacoes,
+  selectCredIdentificacao,
+  updateCredIdentificacao,
+  deleteCredIdentificacao,
 };

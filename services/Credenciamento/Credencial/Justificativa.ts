@@ -1,33 +1,33 @@
 import JustificativaModel from "../../../models/Credenciamento/Credencial/Justificativa";
 
-const JustificativaRepository = require("../../../repositories/Credenciamento/Credencial/Justificativa");
+const JustificativaCredRepository = require("../../../repositories/Credenciamento/Credencial/Justificativa");
 
-const insertJustificativa = async (req: any): Promise<any> => {
+const insertCredJustificativa = async (req: any): Promise<any> => {
   const justificativa = new JustificativaModel(
     req[0].credencial,
     req[0].status,
     req[0].justificativa
   );
   const userId = req[1];
-  return await JustificativaRepository.insertJustificativa([
+  return await JustificativaCredRepository.insertJustificativa([
     justificativa,
     userId,
   ]);
 };
 
-const getJustificativas = async (): Promise<any | undefined> => {
-  const justificativas = await JustificativaRepository.getJustificativas();
+const getCredJustificativas = async (): Promise<any | undefined> => {
+  const justificativas = await JustificativaCredRepository.getJustificativas();
   return justificativas;
 };
 
-const selectJustificativa = async (cnpj: string): Promise<any> => {
-  const justificativa = await JustificativaRepository.selectJustificativa(cnpj);
+const selectCredJustificativa = async (cnpj: string): Promise<any> => {
+  const justificativa = await JustificativaCredRepository.selectJustificativa(cnpj);
   return justificativa;
 };
 
-const deleteJustificativa = async (cnpj: string, req: any): Promise<any> => {
+const deleteCredJustificativa = async (cnpj: string, req: any): Promise<any> => {
   const userId = req;
-  const justificativa = await JustificativaRepository.deleteJustificativa(
+  const justificativa = await JustificativaCredRepository.deleteJustificativa(
     cnpj,
     userId
   );
@@ -35,8 +35,8 @@ const deleteJustificativa = async (cnpj: string, req: any): Promise<any> => {
 };
 
 module.exports = {
-  insertJustificativa,
-  getJustificativas,
-  selectJustificativa,
-  deleteJustificativa,
+  insertCredJustificativa,
+  getCredJustificativas,
+  selectCredJustificativa,
+  deleteCredJustificativa,
 };

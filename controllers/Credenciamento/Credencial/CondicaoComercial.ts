@@ -1,8 +1,8 @@
-const CondicaoComercialServices = require("../../../services/Credenciamento/Credencial/CondicaoComercial");
+const CondicaoComercialCredServices = require("../../../services/Credenciamento/Credencial/CondicaoComercial");
 
-const insertCondicaoComercial = async (req: any, res: any): Promise<any> => {
+const insertCredCondicaoComercial = async (req: any, res: any): Promise<any> => {
   try {
-    const resultado = await CondicaoComercialServices.insertCondicaoComercial([
+    const resultado = await CondicaoComercialCredServices.insertCredCondicaoComercial([
       req.body,
       req.profileId,
     ]);
@@ -14,13 +14,13 @@ const insertCondicaoComercial = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const getCondicoesComerciais = async (
+const getCredCondicoesComerciais = async (
   _: any,
   res: any
 ): Promise<any | undefined> => {
   try {
     const condicoesComerciais =
-      await CondicaoComercialServices.getCondicoesComerciais();
+      await CondicaoComercialCredServices.getCredCondicoesComerciais();
     res.status(200).json(condicoesComerciais);
   } catch (error) {
     error instanceof Error
@@ -29,11 +29,11 @@ const getCondicoesComerciais = async (
   }
 };
 
-const selectCondicaoComercial = async (req: any, res: any): Promise<any> => {
+const selectCredCondicaoComercial = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
     const condicaoComercial =
-      await CondicaoComercialServices.selectCondicaoComercial(cnpj);
+      await CondicaoComercialCredServices.selectCredCondicaoComercial(cnpj);
     if (!condicaoComercial) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -45,10 +45,10 @@ const selectCondicaoComercial = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const updateCondicaoComercial = async (req: any, res: any): Promise<any> => {
+const updateCredCondicaoComercial = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const resultado = await CondicaoComercialServices.updateCondicaoComercial(
+    const resultado = await CondicaoComercialCredServices.updateCredCondicaoComercial(
       cnpj,
       [req.body, req.profileId]
     );
@@ -60,11 +60,11 @@ const updateCondicaoComercial = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const deleteCondicaoComercial = async (req: any, res: any): Promise<any> => {
+const deleteCredCondicaoComercial = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   const produto = req.query.produto;
   try {
-    const deleted = await CondicaoComercialServices.deleteCondicaoComercial(cnpj, [produto, req.profileId]);
+    const deleted = await CondicaoComercialCredServices.deleteCredCondicaoComercial(cnpj, [produto, req.profileId]);
     if (deleted === false) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -77,9 +77,9 @@ const deleteCondicaoComercial = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  insertCondicaoComercial,
-  getCondicoesComerciais,
-  selectCondicaoComercial,
-  updateCondicaoComercial,
-  deleteCondicaoComercial,
+  insertCredCondicaoComercial,
+  getCredCondicoesComerciais,
+  selectCredCondicaoComercial,
+  updateCredCondicaoComercial,
+  deleteCredCondicaoComercial,
 };

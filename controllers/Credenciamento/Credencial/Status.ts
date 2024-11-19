@@ -1,8 +1,8 @@
-const StatusService = require("../../../services/Credenciamento/Credencial/Status");
+const StatusCredService = require("../../../services/Credenciamento/Credencial/Status");
 
-const getClientesStatus = async (_: any, res: any): Promise<any | undefined> => {
+const getCredStatus = async (_: any, res: any): Promise<any | undefined> => {
   try {
-    const status = await StatusService.getStatus();
+    const status = await StatusCredService.getCredStatus();
     res.status(200).json(status);
   } catch (error) {
     error instanceof Error
@@ -11,10 +11,10 @@ const getClientesStatus = async (_: any, res: any): Promise<any | undefined> => 
   }
 };
 
-const selectClientesStatus = async (req: any, res: any): Promise<any> => {
+const selectCredStatus = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const status = await StatusService.selectStatus(cnpj);
+    const status = await StatusCredService.selectCredStatus(cnpj);
     if (!status) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -26,10 +26,10 @@ const selectClientesStatus = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const updateClientesStatus = async (req: any, res: any): Promise<any> => {
+const updateCredStatus = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const resultado = await StatusService.updateStatus(cnpj, [req.body, req.profileId]);
+    const resultado = await StatusCredService.updateCredStatus(cnpj, [req.body, req.profileId]);
     res.status(201).json(resultado);
   } catch (error) {
     error instanceof Error
@@ -39,7 +39,7 @@ const updateClientesStatus = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  getClientesStatus,
-  selectClientesStatus,
-  updateClientesStatus,
+  getCredStatus,
+  selectCredStatus,
+  updateCredStatus,
 };

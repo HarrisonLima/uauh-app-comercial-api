@@ -1,8 +1,8 @@
 import RepresentanteModel from "../../../models/Credenciamento/Credencial/Representante";
 
-const RepresentanteRepository = require("../../../repositories/Credenciamento/Credencial/Representante");
+const RepresentanteCredRepository = require("../../../repositories/Credenciamento/Credencial/Representante");
 
-const insertRepresentante = async (req: any): Promise<any> => {
+const insertCredRepresentante = async (req: any): Promise<any> => {
   const representante = new RepresentanteModel(
     req[0].credencial,
     req[0].nome,
@@ -15,23 +15,23 @@ const insertRepresentante = async (req: any): Promise<any> => {
   );
 
   const userId = req[1];
-  return await RepresentanteRepository.insertRepresentante([
+  return await RepresentanteCredRepository.insertRepresentante([
     representante,
     userId,
   ]);
 };
 
-const getRepresentantes = async (): Promise<any | undefined> => {
-  const representantes = await RepresentanteRepository.getRepresentantes();
+const getCredRepresentantes = async (): Promise<any | undefined> => {
+  const representantes = await RepresentanteCredRepository.getRepresentantes();
   return representantes;
 };
 
-const selectRepresentante = async (cnpj: string): Promise<any> => {
-  const representante = await RepresentanteRepository.selectRepresentante(cnpj);
+const selectCredRepresentante = async (cnpj: string): Promise<any> => {
+  const representante = await RepresentanteCredRepository.selectRepresentante(cnpj);
   return representante;
 };
 
-const updateRepresentante = async (cpf: string, req: any): Promise<any> => {
+const updateCredRepresentante = async (cpf: string, req: any): Promise<any> => {
   const representante = new RepresentanteModel(
     req[0][0].credencial,
     req[0][0].nome,
@@ -43,15 +43,15 @@ const updateRepresentante = async (cpf: string, req: any): Promise<any> => {
     req[0][0].cargo
   );
   const userId = req[1];
-  return await RepresentanteRepository.updateRepresentante(cpf, [
+  return await RepresentanteCredRepository.updateRepresentante(cpf, [
     representante,
     userId,
   ]);
 };
 
-const deleteRepresentante = async (cpf: string, req: any): Promise<any> => {
+const deleteCredRepresentante = async (cpf: string, req: any): Promise<any> => {
   const userId = req;
-  const representante = await RepresentanteRepository.deleteRepresentante(
+  const representante = await RepresentanteCredRepository.deleteRepresentante(
     cpf,
     userId
   );
@@ -59,9 +59,9 @@ const deleteRepresentante = async (cpf: string, req: any): Promise<any> => {
 };
 
 module.exports = {
-  insertRepresentante,
-  getRepresentantes,
-  selectRepresentante,
-  updateRepresentante,
-  deleteRepresentante,
+  insertCredRepresentante,
+  getCredRepresentantes,
+  selectCredRepresentante,
+  updateCredRepresentante,
+  deleteCredRepresentante,
 };

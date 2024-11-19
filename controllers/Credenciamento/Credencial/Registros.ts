@@ -1,8 +1,8 @@
-const RegistrosServices = require("../../../services/Credenciamento/Credencial/Registros");
+const RegistrosCredServices = require("../../../services/Credenciamento/Credencial/Registros");
 
-const getRegistros = async (_: any, res: any): Promise<any | undefined> => {
+const getCredRegistros = async (_: any, res: any): Promise<any | undefined> => {
   try {
-    const registros = await RegistrosServices.getRegistrosServices();
+    const registros = await RegistrosCredServices.getCredRegistrosServices();
     res.status(200).json(registros);
   } catch (error) {
     error instanceof Error
@@ -11,10 +11,10 @@ const getRegistros = async (_: any, res: any): Promise<any | undefined> => {
   }
 };
 
-const selectRegistros = async (req: any, res: any): Promise<any> => {
+const selectCredRegistros = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const registro = await RegistrosServices.selectRegistrosServices(cnpj);
+    const registro = await RegistrosCredServices.selectCredRegistrosServices(cnpj);
     if (!registro) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -27,6 +27,6 @@ const selectRegistros = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  getRegistros,
-  selectRegistros,
+  getCredRegistros,
+  selectCredRegistros,
 };

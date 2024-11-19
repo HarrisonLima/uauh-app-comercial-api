@@ -1,8 +1,8 @@
-const LocalizacaoServices = require("../../../services/Credenciamento/Credencial/Localizacao");
+const LocalizacaoCredServices = require("../../../services/Credenciamento/Credencial/Localizacao");
 
-const getLocalizacoes = async (_: any, res: any): Promise<any | undefined> => {
+const getCredLocalizacoes = async (_: any, res: any): Promise<any | undefined> => {
   try {
-    const localizacoes = await LocalizacaoServices.getLocalizacoes();
+    const localizacoes = await LocalizacaoCredServices.getCredLocalizacoes();
     res.status(200).json(localizacoes);
   } catch (error) {
     error instanceof Error
@@ -11,10 +11,10 @@ const getLocalizacoes = async (_: any, res: any): Promise<any | undefined> => {
   }
 };
 
-const selectLocalizacao = async (req: any, res: any): Promise<any> => {
+const selectCredLocalizacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const localizacao = await LocalizacaoServices.selectLocalizacao(cnpj);
+    const localizacao = await LocalizacaoCredServices.selectCredLocalizacao(cnpj);
     if (!localizacao) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -26,10 +26,10 @@ const selectLocalizacao = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const updateLocalizacao = async (req: any, res: any): Promise<any> => {
+const updateCredLocalizacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const resultado = await LocalizacaoServices.updateLocalizacao(cnpj, [req.body, req.profileId]);
+    const resultado = await LocalizacaoCredServices.updateCredLocalizacao(cnpj, [req.body, req.profileId]);
     res.status(201).json(resultado);
   } catch (error) {
     error instanceof Error
@@ -39,7 +39,7 @@ const updateLocalizacao = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  getLocalizacoes,
-  selectLocalizacao,
-  updateLocalizacao,
+  getCredLocalizacoes,
+  selectCredLocalizacao,
+  updateCredLocalizacao,
 };

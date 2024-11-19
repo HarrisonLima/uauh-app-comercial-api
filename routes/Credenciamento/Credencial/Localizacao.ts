@@ -6,8 +6,8 @@ const CredencialController = require("../../../controllers/Credenciamento/Creden
 
 router.use(authToken)
 
-router.get("/credenciamentos/credenciais/localizacoes", CredencialController.getLocalizacoes);
-router.get("/credenciamentos/credenciais/localizacoes/:cnpj", CredencialController.selectLocalizacao);
-router.put("/credenciamentos/credenciais/localizacoes/:cnpj", CredencialController.updateLocalizacao);
+router.get("/credenciamentos/credenciais/localizacoes", CredencialController.getCredLocalizacoes);
+router.get("/credenciamentos/credenciais/localizacoes/:cnpj", CredencialController.selectCredLocalizacao);
+router.put("/credenciamentos/credenciais/localizacoes/:cnpj", CredencialController.updateCredLocalizacao);
 
 module.exports = router;

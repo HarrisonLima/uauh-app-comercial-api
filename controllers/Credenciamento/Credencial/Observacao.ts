@@ -1,8 +1,8 @@
-const ObservacaoServices = require("../../../services/Credenciamento/Credencial/Observacao");
+const ObservacaoCredServices = require("../../../services/Credenciamento/Credencial/Observacao");
 
-const insertObservacao = async (req: any, res: any): Promise<any> => {
+const insertCredObservacao = async (req: any, res: any): Promise<any> => {
   try {
-    const resultado = await ObservacaoServices.insertObservacao([
+    const resultado = await ObservacaoCredServices.insertCredObservacao([
       req.body,
       req.profileId,
     ]);
@@ -14,9 +14,9 @@ const insertObservacao = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const getObservacoes = async (_: any, res: any): Promise<any | undefined> => {
+const getCredObservacoes = async (_: any, res: any): Promise<any | undefined> => {
   try {
-    const observacoes = await ObservacaoServices.getObservacoes();
+    const observacoes = await ObservacaoCredServices.getCredObservacoes();
     res.status(200).json(observacoes);
   } catch (error) {
     error instanceof Error
@@ -25,10 +25,10 @@ const getObservacoes = async (_: any, res: any): Promise<any | undefined> => {
   }
 };
 
-const selectObservacao = async (req: any, res: any): Promise<any> => {
+const selectCredObservacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const observacao = await ObservacaoServices.selectObservacao(cnpj);
+    const observacao = await ObservacaoCredServices.selectCredObservacao(cnpj);
     if (!observacao) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -40,10 +40,10 @@ const selectObservacao = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const updateObservacao = async (req: any, res: any): Promise<any> => {
+const updateCredObservacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const resultado = await ObservacaoServices.updateObservacao(cnpj, [
+    const resultado = await ObservacaoCredServices.updateCredObservacao(cnpj, [
       req.body,
       req.profileId,
     ]);
@@ -55,10 +55,10 @@ const updateObservacao = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const deleteObservacao = async (req: any, res: any): Promise<any> => {
+const deleteCredObservacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const deleted = await ObservacaoServices.deleteObservacao(
+    const deleted = await ObservacaoCredServices.deleteCredObservacao(
       cnpj,
       req.profileId
     );
@@ -74,9 +74,9 @@ const deleteObservacao = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  insertObservacao,
-  getObservacoes,
-  selectObservacao,
-  updateObservacao,
-  deleteObservacao,
+  insertCredObservacao,
+  getCredObservacoes,
+  selectCredObservacao,
+  updateCredObservacao,
+  deleteCredObservacao,
 };

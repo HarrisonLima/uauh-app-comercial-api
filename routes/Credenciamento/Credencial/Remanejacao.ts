@@ -6,11 +6,17 @@ const CredencialController = require("../../../controllers/Credenciamento/Creden
 
 router.use(authToken);
 
-router.get("/credenciamentos/credenciais/remanejacoes", CredencialController.getRemanejacoes);
-router.get("/credenciamentos/credenciais/remanejacoes/:cnpj", CredencialController.selectRemanejacao);
+router.get(
+  "/credenciamentos/credenciais/remanejacoes",
+  CredencialController.getCredRemanejacoes
+);
+router.get(
+  "/credenciamentos/credenciais/remanejacoes/:cnpj",
+  CredencialController.selectCredRemanejacao
+);
 router.put(
   "/credenciamentos/credenciais/remanejacoes/:cnpj",
-  CredencialController.updateRemanejacao
+  CredencialController.updateCredRemanejacao
 );
 
 module.exports = router;

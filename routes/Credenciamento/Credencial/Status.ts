@@ -6,8 +6,8 @@ const CredencialController = require("../../../controllers/Credenciamento/Creden
 
 router.use(authToken)
 
-router.get("/credenciamentos/credenciais/status", CredencialController.getCredenciaisStatus);
-router.get("/credenciamentos/credenciais/status/:cnpj", CredencialController.selectCredencialStatus);
-router.put("/credenciamentos/credenciais/status/:cnpj", CredencialController.updateCredencialStatus);
+router.get("/credenciamentos/credenciais/status", CredencialController.getCredStatus);
+router.get("/credenciamentos/credenciais/status/:cnpj", CredencialController.selectCredStatus);
+router.put("/credenciamentos/credenciais/status/:cnpj", CredencialController.updateCredStatus);
 
 module.exports = router;

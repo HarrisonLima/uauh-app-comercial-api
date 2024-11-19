@@ -1,8 +1,8 @@
-const RemanejacaoServices = require("../../../services/Credenciamento/Credencial/Remanejacao");
+const RemanejacaoCredServices = require("../../../services/Credenciamento/Credencial/Remanejacao");
 
-const getRemanejacoes = async (_: any, res: any): Promise<any | undefined> => {
+const getCredRemanejacoes = async (_: any, res: any): Promise<any | undefined> => {
   try {
-    const remanejacoes = await RemanejacaoServices.getRemanejacoes();
+    const remanejacoes = await RemanejacaoCredServices.getCredRemanejacoes();
     res.status(200).json(remanejacoes);
   } catch (error) {
     error instanceof Error
@@ -11,10 +11,10 @@ const getRemanejacoes = async (_: any, res: any): Promise<any | undefined> => {
   }
 };
 
-const selectRemanejacao = async (req: any, res: any): Promise<any> => {
+const selectCredRemanejacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const remanejacao = await RemanejacaoServices.selectRemanejacao(cnpj);
+    const remanejacao = await RemanejacaoCredServices.selectCredRemanejacao(cnpj);
     if (!remanejacao) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -26,12 +26,12 @@ const selectRemanejacao = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const updateRemanejacao = async (req: any, res: any): Promise<any> => {
+const updateCredRemanejacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
 
   console.log(cnpj, req.body);
   try {
-    const resultado = await RemanejacaoServices.updateRemanejacao(cnpj, [
+    const resultado = await RemanejacaoCredServices.updateCredRemanejacao(cnpj, [
       req.body,
       req.profileId,
     ]);
@@ -44,7 +44,7 @@ const updateRemanejacao = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  getRemanejacoes,
-  selectRemanejacao,
-  updateRemanejacao,
+  getCredRemanejacoes,
+  selectCredRemanejacao,
+  updateCredRemanejacao,
 };

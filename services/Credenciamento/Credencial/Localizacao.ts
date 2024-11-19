@@ -1,18 +1,18 @@
 import LocalizacaoModel from "../../../models/Credenciamento/Credencial/Localizacao";
 
-const LocalizacaoRepository = require("../../../repositories/Credenciamento/Credencial/Localizacao");
+const LocalizacaoCredRepository = require("../../../repositories/Credenciamento/Credencial/Localizacao");
 
-const getLocalizacoes = async (): Promise<any | undefined> => {
-  const localizacoes = await LocalizacaoRepository.getLocalizacoes();
+const getCredLocalizacoes = async (): Promise<any | undefined> => {
+  const localizacoes = await LocalizacaoCredRepository.getLocalizacoes();
   return localizacoes;
 };
 
-const selectLocalizacao = async (cnpj: string): Promise<any> => {
-  const localizacao = await LocalizacaoRepository.selectLocalizacao(cnpj);
+const selectCredLocalizacao = async (cnpj: string): Promise<any> => {
+  const localizacao = await LocalizacaoCredRepository.selectLocalizacao(cnpj);
   return localizacao;
 };
 
-const updateLocalizacao = async (cnpj: string, req: any): Promise<any> => {
+const updateCredLocalizacao = async (cnpj: string, req: any): Promise<any> => {
   const localizacao = new LocalizacaoModel(
     req[0].cliente,
     req[0].cep,
@@ -25,14 +25,14 @@ const updateLocalizacao = async (cnpj: string, req: any): Promise<any> => {
     req[0].coordenadas,
   );
   const userId = req[1];
-  return await LocalizacaoRepository.updateLocalizacao(cnpj, [
+  return await LocalizacaoCredRepository.updateLocalizacao(cnpj, [
     localizacao,
     userId,
   ]);
 };
 
 module.exports = {
-  getLocalizacoes,
-  selectLocalizacao,
-  updateLocalizacao,
+  getCredLocalizacoes,
+  selectCredLocalizacao,
+  updateCredLocalizacao,
 };

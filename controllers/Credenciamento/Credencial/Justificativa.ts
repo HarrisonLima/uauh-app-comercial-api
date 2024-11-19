@@ -1,8 +1,8 @@
-const JustificativaServices = require("../../../services/Credenciamento/Credencial/Justificativa");
+const JustificativaCredServices = require("../../../services/Credenciamento/Credencial/Justificativa");
 
-const insertJustificativa = async (req: any, res: any): Promise<any> => {
+const insertCredJustificativa = async (req: any, res: any): Promise<any> => {
   try {
-    const resultado = await JustificativaServices.insertJustificativa([
+    const resultado = await JustificativaCredServices.insertCredJustificativa([
       req.body,
       req.profileId,
     ]);
@@ -14,9 +14,9 @@ const insertJustificativa = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const getJustificativas = async (_: any, res: any): Promise<any | undefined> => {
+const getCredJustificativas = async (_: any, res: any): Promise<any | undefined> => {
   try {
-    const justificativas = await JustificativaServices.getJustificativas();
+    const justificativas = await JustificativaCredServices.getCredJustificativas();
     res.status(200).json(justificativas);
   } catch (error) {
     error instanceof Error
@@ -25,10 +25,10 @@ const getJustificativas = async (_: any, res: any): Promise<any | undefined> => 
   }
 };
 
-const selectJustificativa = async (req: any, res: any): Promise<any> => {
+const selectCredJustificativa = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const justificativa = await JustificativaServices.selectJustificativa(cnpj);
+    const justificativa = await JustificativaCredServices.selectCredJustificativa(cnpj);
     if (!justificativa) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -40,10 +40,10 @@ const selectJustificativa = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const deleteJustificativa = async (req: any, res: any): Promise<any> => {
+const deleteCredJustificativa = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const deleted = await JustificativaServices.deleteJustificativa(
+    const deleted = await JustificativaCredServices.deleteCredJustificativa(
       cnpj,
       req.profileId
     );
@@ -59,9 +59,9 @@ const deleteJustificativa = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  insertJustificativa,
-  getJustificativas,
-  selectJustificativa,
-  deleteJustificativa,
+  insertCredJustificativa,
+  getCredJustificativas,
+  selectCredJustificativa,
+  deleteCredJustificativa,
 };
 

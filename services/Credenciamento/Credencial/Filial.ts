@@ -1,39 +1,39 @@
 import FilialModel from "../../../models/Credenciamento/Credencial/Filial";
 
-const FilialRepository = require("../../../repositories/Credenciamento/Credencial/Filial");
+const FilialCredRepository = require("../../../repositories/Credenciamento/Credencial/Filial");
 
-const insertFilial = async (req: any): Promise<any> => {
+const insertCredFilial = async (req: any): Promise<any> => {
   const filial = new FilialModel(req[0].matriz, req[0].filial);
   const userId = req[1];
-  return await FilialRepository.insertFilial([filial, userId]);
+  return await FilialCredRepository.insertFilial([filial, userId]);
 };
 
-const getFiliais = async (): Promise<any | undefined> => {
-  const filiais = await FilialRepository.getFiliais();
+const getCredFiliais = async (): Promise<any | undefined> => {
+  const filiais = await FilialCredRepository.getFiliais();
   return filiais;
 };
 
-const selectFilial = async (cnpj: string): Promise<any> => {
-  const filial = await FilialRepository.selectFilial(cnpj);
+const selectCredFilial = async (cnpj: string): Promise<any> => {
+  const filial = await FilialCredRepository.selectFilial(cnpj);
   return filial;
 };
 
-const updateFilial = async (cnpj: string, req: any): Promise<any> => {
+const updateCredFilial = async (cnpj: string, req: any): Promise<any> => {
   const filial = new FilialModel(req[0].matriz, req[0].filial);
   const userId = req[1];
-  return await FilialRepository.updateFilial(cnpj, [filial, userId]);
+  return await FilialCredRepository.updateFilial(cnpj, [filial, userId]);
 };
 
-const deleteFilial = async (cnpj: string, req: any): Promise<any> => {
+const deleteCredFilial = async (cnpj: string, req: any): Promise<any> => {
   const userId = req;
-  const filial = await FilialRepository.deleteFilial(cnpj, userId);
+  const filial = await FilialCredRepository.deleteFilial(cnpj, userId);
   return filial;
 };
 
 module.exports = {
-  insertFilial,
-  getFiliais,
-  selectFilial,
-  updateFilial,
-  deleteFilial,
+  insertCredFilial,
+  getCredFiliais,
+  selectCredFilial,
+  updateCredFilial,
+  deleteCredFilial,
 };

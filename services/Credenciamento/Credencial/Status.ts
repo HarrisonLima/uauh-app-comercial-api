@@ -1,30 +1,30 @@
 import StatusModel from "../../../models/Credenciamento/Credencial/Status";
 
-const StatusRepository = require("../../../repositories/Credenciamento/Credencial/Status");
+const StatusCredRepository = require("../../../repositories/Credenciamento/Credencial/Status");
 
-const getStatus = async (): Promise<any | undefined> => {
-  const status = await StatusRepository.getStatus();
+const getCredStatus = async (): Promise<any | undefined> => {
+  const status = await StatusCredRepository.getStatus();
   return status;
 };
 
-const selectStatus = async (cnpj: string): Promise<any> => {
-  const status = await StatusRepository.selectStatus(cnpj);
+const selectCredStatus = async (cnpj: string): Promise<any> => {
+  const status = await StatusCredRepository.selectStatus(cnpj);
   return status;
 };
 
-const updateStatus = async (cnpj: string, req: any): Promise<any> => {
+const updateCredStatus = async (cnpj: string, req: any): Promise<any> => {
   const status = new StatusModel(
     req[0].status,
   );
   const userId = req[1];
-  return await StatusRepository.updateStatus(cnpj, [
+  return await StatusCredRepository.updateStatus(cnpj, [
     status,
     userId,
   ]);
 };
 
 module.exports = {
-  getStatus,
-  selectStatus,
-  updateStatus,
+  getCredStatus,
+  selectCredStatus,
+  updateCredStatus,
 };

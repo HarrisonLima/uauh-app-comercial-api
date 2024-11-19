@@ -1,8 +1,8 @@
-const FilialServices = require("../../../services/Credenciamento/Credencial/Filial");
+const FilialCredServices = require("../../../services/Credenciamento/Credencial/Filial");
 
-const insertFilial = async (req: any, res: any): Promise<any> => {
+const insertCredFilial = async (req: any, res: any): Promise<any> => {
   try {
-    const resultado = await FilialServices.insertFilial([req.body, req.profileId]);
+    const resultado = await FilialCredServices.insertCredFilial([req.body, req.profileId]);
     res.status(201).json(resultado);
   } catch (error) {
     error instanceof Error
@@ -11,9 +11,9 @@ const insertFilial = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const getFiliais = async (_: any, res: any): Promise<any | undefined> => {
+const getCredFiliais = async (_: any, res: any): Promise<any | undefined> => {
   try {
-    const filiais = await FilialServices.getFiliais();
+    const filiais = await FilialCredServices.getCredFiliais();
     res.status(200).json(filiais);
   } catch (error) {
     error instanceof Error
@@ -22,10 +22,10 @@ const getFiliais = async (_: any, res: any): Promise<any | undefined> => {
   }
 };
 
-const selectFilial = async (req: any, res: any): Promise<any> => {
+const selectCredFilial = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const filial = await FilialServices.selectFilial(cnpj);
+    const filial = await FilialCredServices.selectCredFilial(cnpj);
     if (!filial) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -37,11 +37,11 @@ const selectFilial = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const deleteFilial = async (req: any, res: any): Promise<any> => {
+const deleteCredFilial = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
 
   try {
-    const deleted = await FilialServices.deleteFilial(cnpj, req.profileId);
+    const deleted = await FilialCredServices.deleteCredFilial(cnpj, req.profileId);
     if (deleted[1] !== true) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -54,8 +54,8 @@ const deleteFilial = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  insertFilial,
-  getFiliais,
-  selectFilial,
-  deleteFilial,
+  insertCredFilial,
+  getCredFiliais,
+  selectCredFilial,
+  deleteCredFilial,
 };

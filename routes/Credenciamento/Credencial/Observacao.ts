@@ -6,11 +6,11 @@ const CredencialController = require("../../../controllers/Credenciamento/Creden
 
 router.use(authToken)
 
-router.post("/credenciamentos/credenciais/observacoes", CredencialController.insertObservacao);
-router.get("/credenciamentos/credenciais/observacoes", CredencialController.getObservacoes);
-router.get("/credenciamentos/credenciais/observacoes/:cnpj", CredencialController.selectObservacao);
-router.put("/credenciamentos/credenciais/observacoes/:cnpj", CredencialController.updateObservacao);
-router.delete("/credenciamentos/credenciais/observacoes/:cnpj", CredencialController.deleteObservacao);
+router.post("/credenciamentos/credenciais/observacoes", CredencialController.insertCredObservacao);
+router.get("/credenciamentos/credenciais/observacoes", CredencialController.getCredObservacoes);
+router.get("/credenciamentos/credenciais/observacoes/:cnpj", CredencialController.selectCredObservacao);
+router.put("/credenciamentos/credenciais/observacoes/:cnpj", CredencialController.updateCredObservacao);
+router.delete("/credenciamentos/credenciais/observacoes/:cnpj", CredencialController.deleteCredObservacao);
 
 module.exports = router;
  
