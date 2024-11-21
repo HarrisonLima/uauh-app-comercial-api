@@ -6,10 +6,10 @@ const CredencialController = require("../../../controllers/Credenciamento/Creden
 
 router.use(authToken)
 
-router.post("/credenciamentos/credencial/tecnologias", CredencialController.insertTecnologia);
-router.get("/credenciamentos/credencial/tecnologias", CredencialController.getTecnologias);
-router.get("/credenciamentos/credencial/tecnologias/:cnpj", CredencialController.selectTecnologia);
-router.put("/credenciamentos/credencial/tecnologias/:cnpj", CredencialController.updateTecnologia);
-router.delete("/credenciamentos/credencial/tecnologias/:cnpj", CredencialController.deleteTecnologia);
+router.post("/credenciamentos/credenciais/tecnologias", CredencialController.insertCredTecnologia);
+router.get("/credenciamentos/credenciais/tecnologias", CredencialController.getCredTecnologias);
+router.get("/credenciamentos/credenciais/tecnologias/:cnpj", CredencialController.selectCredTecnologia);
+router.put("/credenciamentos/credenciais/tecnologias/:cnpj", CredencialController.updateCredTecnologia);
+router.delete("/credenciamentos/credenciais/tecnologias/:cnpj", CredencialController.deleteCredTecnologia);
 
 module.exports = router;

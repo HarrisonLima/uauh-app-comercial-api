@@ -1,8 +1,8 @@
-const TecnologiaServices = require("../../../services/Credenciamento/Credencial/Tecnologia");
+const TecnologiaCredServices = require("../../../services/Credenciamento/Credencial/Tecnologia");
 
-const insertTecnologia = async (req: any, res: any): Promise<any> => {
+const insertCredTecnologia = async (req: any, res: any): Promise<any> => {
   try {
-    const resultado = await TecnologiaServices.insertTecnologia([
+    const resultado = await TecnologiaCredServices.insertCredTecnologia([
       req.body,
       req.profileId,
     ]);
@@ -14,13 +14,13 @@ const insertTecnologia = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const getTecnologias = async (
+const getCredTecnologias = async (
   _: any,
   res: any
 ): Promise<any | undefined> => {
   try {
     const tecnologias =
-      await TecnologiaServices.getTecnologias();
+      await TecnologiaCredServices.getCredTecnologias();
     res.status(200).json(tecnologias);
   } catch (error) {
     error instanceof Error
@@ -29,11 +29,11 @@ const getTecnologias = async (
   }
 };
 
-const selectTecnologia = async (req: any, res: any): Promise<any> => {
+const selectCredTecnologia = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
     const tecnologia =
-      await TecnologiaServices.selectTecnologia(cnpj);
+      await TecnologiaCredServices.selectCredTecnologia(cnpj);
     if (!tecnologia) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -45,10 +45,10 @@ const selectTecnologia = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const updateTecnologia = async (req: any, res: any): Promise<any> => {
+const updateCredTecnologia = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
   try {
-    const resultado = await TecnologiaServices.updateTecnologia(
+    const resultado = await TecnologiaCredServices.updateCredTecnologia(
       cnpj,
       [req.body, req.profileId]
     );
@@ -60,10 +60,11 @@ const updateTecnologia = async (req: any, res: any): Promise<any> => {
   }
 };
 
-const deleteTecnologia = async (req: any, res: any): Promise<any> => {
+const deleteCredTecnologia = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
+  const equipamento = req.query.equipamento;
   try {
-    const deleted = await TecnologiaServices.deleteTecnologia(cnpj, [req.tecnologia, req.profileId]);
+    const deleted = await TecnologiaCredServices.deleteCredTecnologia(cnpj, [equipamento, req.profileId]);
     if (deleted === false) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }
@@ -76,9 +77,9 @@ const deleteTecnologia = async (req: any, res: any): Promise<any> => {
 };
 
 module.exports = {
-  insertTecnologia,
-  getTecnologias,
-  selectTecnologia,
-  updateTecnologia,
-  deleteTecnologia,
+  insertCredTecnologia,
+  getCredTecnologias,
+  selectCredTecnologia,
+  updateCredTecnologia,
+  deleteCredTecnologia,
 };

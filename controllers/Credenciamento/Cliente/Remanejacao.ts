@@ -29,7 +29,6 @@ const selectRemanejacao = async (req: any, res: any): Promise<any> => {
 const updateRemanejacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
 
-  console.log(cnpj, req.body);
   try {
     const resultado = await RemanejacaoServices.updateRemanejacao(cnpj, [
       req.body,

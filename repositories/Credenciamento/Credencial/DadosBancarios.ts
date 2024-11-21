@@ -41,7 +41,7 @@ const insertDadosBancarios = async (req: any, res: any): Promise<any> => {
     const registro = await db.query(query, values);
     console.log("Registro: ", registro.rows);
 
-    return registro;
+    return registro.rows;
   } catch (error: any) {
     console.error("Error: ", error);
     item.rows[0]
@@ -133,7 +133,7 @@ const updateDadosBancarios = async (cnpj: string, req: any, res: any) => {
     const registro = await db.query(query, values);
     console.log("Registro: ", registro.rows);
 
-    return registro;
+    return registro.rows;
   } catch (error: any) {
     console.error("Error: ", error);
     res.status(500).json({ error });

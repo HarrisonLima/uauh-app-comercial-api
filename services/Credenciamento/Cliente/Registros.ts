@@ -7,7 +7,7 @@ const getRegistrosServices = async (): Promise<any | undefined> => {
 
 const selectRegistrosServices = async (cnpj: string): Promise<any> => {
   const registro = await RegistrosRepository.selectRegistros(cnpj);
-  return registro;
+  return registro.rows;
 };
 
 module.exports = {

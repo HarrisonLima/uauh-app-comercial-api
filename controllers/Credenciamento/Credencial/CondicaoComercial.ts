@@ -62,9 +62,11 @@ const updateCredCondicaoComercial = async (req: any, res: any): Promise<any> => 
 
 const deleteCredCondicaoComercial = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
-  const produto = req.query.produto;
+  const item = req.query.item;
+  const itemId = req.query.itemId;
+
   try {
-    const deleted = await CondicaoComercialCredServices.deleteCredCondicaoComercial(cnpj, [produto, req.profileId]);
+    const deleted = await CondicaoComercialCredServices.deleteCredCondicaoComercial(cnpj, [item, itemId, req.profileId]);
     if (deleted === false) {
       return res.status(404).json({ message: "Registro não encontrado" });
     }

@@ -39,7 +39,7 @@ const insertJustificativa = async (req: any, res: any): Promise<any> => {
     item = await db.query(query, values);
 
     query =
-      "INSERT INTO credenciais.registros_credencials_status (usuario_id, credencial_id, status_id) VALUES ($1, $2, $3) RETURNING *;";
+      "INSERT INTO credenciais.registros_credenciais_status (usuario_id, credencial_id, status_id) VALUES ($1, $2, $3) RETURNING *;";
     values = [userId, item.rows[0]["credencial_id"], item.rows[0]["status_id"]];
 
     const registroStatus = await db.query(query, values);
@@ -173,7 +173,7 @@ const deleteJustificativa = async (
     item = await db.query(query, values);
 
     query =
-      "INSERT INTO credenciais.registros_credencials (usuario_id, credencial_id, credencial_item, operacao, etapa_credenciamento) VALUES ($1, (SELECT id FROM credenciais.credenciais WHERE credenciais.cnpj = $2), $3, $4, $5) RETURNING *;";
+      "INSERT INTO credenciais.registros_credenciais (usuario_id, credencial_id, credencial_item, operacao, etapa_credenciamento) VALUES ($1, (SELECT id FROM credenciais.credenciais WHERE credenciais.cnpj = $2), $3, $4, $5) RETURNING *;";
     values = [userId, cnpj, message.rows[0].justificativa, "Excluído", "Justificativa"];
 
     const registro = await db.query(query, values);

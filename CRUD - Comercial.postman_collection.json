@@ -1,0 +1,2653 @@
+{
+	"info": {
+		"_postman_id": "efe98366-8e08-4ce1-b2fb-41d5bb33a542",
+		"name": "CRUD - Comercial",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) in \"Tests\" to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31489611"
+	},
+	"item": [
+		{
+			"name": "Cadastro",
+			"item": [
+				{
+					"name": "Perfil Acesso",
+					"item": [
+						{
+							"name": "Lista Perfis",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzdWFyaW8iOiJVc3VhcmlvIDA0IiwiaWF0IjoxNzEwMTY5NzgzLCJleHAiOjE3MTAyMTI5ODN9.ZyDuCIUZ5JNz0gHt13NompNgHtc933LGn74xAtZmVVY"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/perfis",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"perfis"
+									]
+								},
+								"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra Perfil",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"perfilAcesso\": \"Perfil 01\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/perfis",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"perfis"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Perfil",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful PUT request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"perfilAcesso\": \"Perfil 01\",\n    \"situacao\": \"Ativo\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/perfis/5",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"perfis",
+										"5"
+									]
+								},
+								"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Produto",
+					"item": [
+						{
+							"name": "Lista Produtos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/produtos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"produtos"
+									]
+								},
+								"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra Produto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"produto\": \"Multi benefício\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/produtos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"produtos"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Produto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful PUT request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"produto\": \"Produto 02\",\n    \"situacao\": \"Ativo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/produtos/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"produtos",
+										"3"
+									]
+								},
+								"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Equipamento",
+					"item": [
+						{
+							"name": "Lista Equipamentos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/equipamentos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"equipamentos"
+									]
+								},
+								"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra Equipamento",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"equipamento\": \"POS - Cielo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/equipamentos",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"equipamentos"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Equipamento",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful PUT request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"equipamento\": \"Equipamento 01\",\n    \"situacao\": \"Ativo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/equipamentos/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"equipamentos",
+										"3"
+									]
+								},
+								"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Status",
+					"item": [
+						{
+							"name": "Lista Status",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/status",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"status"
+									]
+								},
+								"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra Status",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status\": \"Excluído\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/status",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"status"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Status",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful PUT request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"status\": \"Status 02\",\n    \"situacao\": \"Ativo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/status/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"status",
+										"3"
+									]
+								},
+								"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tarifa",
+					"item": [
+						{
+							"name": "Lista Tarifas",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/tarifas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tarifas"
+									]
+								},
+								"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra Tarifa",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tarifa\": \"Tarifa 01\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/tarifas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tarifas"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Tarifa",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful PUT request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"tarifa\": \"Tarifa 02\",\n    \"situacao\": \"Ativo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/tarifas/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tarifas",
+										"2"
+									]
+								},
+								"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Usuário",
+					"item": [
+						{
+							"name": "Lista Usuários",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/usuarios",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								},
+								"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra Usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"perfilAcesso\": 1,\n    \"usuario\": \"roxy.credencia\",\n    \"senha\": \"@Credencia0123\",\n    \"nome\": \"Roxy credenciador\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/usuarios",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								},
+								"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful PUT request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+											"});",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"perfilAcesso\": \"Administrador\",\n        \"usuario\": \"roxy.admin\",\n        \"nome\": \"Roxy Adminstrador\",\n        \"situacao\": \"Ativo\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/usuarios/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"usuarios",
+										"1"
+									]
+								},
+								"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+							},
+							"response": []
+						},
+						{
+							"name": "Redefinir senha",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/usuarios/redefinir-senha/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"usuarios",
+										"redefinir-senha",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Logar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"roxy.admin\",\n    \"password\": \"Admin#123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}auth",
+							"host": [
+								"{{base_url}}auth"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "FindUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"roxy.admin\",\n    \"password\": \"admin123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}auth-no-acess",
+							"host": [
+								"{{base_url}}auth-no-acess"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Valida Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}token",
+							"host": [
+								"{{base_url}}token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Identificação",
+					"item": [
+						{
+							"name": "Cadastra cliente",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"orgaoPublico\": false,\r\n    \"simplesNacional\": false,\r\n    \"cnpj\": \"01234567890127\",\r\n    \"razaoSocial\": \"Teste\",\r\n    \"inscricaoEstadual\": \"99998877\",\r\n    \"ramoAtividade\": \"Teste também\",\r\n    \"nomeFantasia\": \"Teste fantasia\",\r\n    \"telefone\": \"4499887766\",\r\n    \"email\": \"teste@teste.com\",\r\n    \"emailFinanceiro\": \"teste@teste.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/identificacoes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"identificacoes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca cliente",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/identificacoes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"identificacoes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Filial",
+					"item": [
+						{
+							"name": "Busca filial",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/filiais",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"filiais"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra filial",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"matriz\": \"94571424000150\",\r\n    \"filial\": \"53915746000191\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/filiais",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"filiais"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluí filial",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/filiais/01234567890127",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"filiais",
+										"01234567890127"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Condição Comercial",
+					"item": [
+						{
+							"name": "Cadastra condição comercial",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cliente\": \"84405479000136\",\r\n    \"produto\": 3,\r\n    \"tipoPagamento\": \"Boleto\",\r\n    \"faturamento\": \"Pré-pago\",\r\n    \"rede\": \"Rede aberta\",\r\n    \"saqueIncluso\": false,\r\n    \"saque\": 0,\r\n    \"apuracao\": 15,\r\n    \"pagamento\": 30,\r\n    \"tipoTaxa\": \"Real\",\r\n    \"taxa\": 0,\r\n    \"personalizacao\": 0,\r\n    \"limite\": 0,\r\n    \"adesao\": 0,\r\n    \"emissao\": 0,\r\n    \"segundaVia\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/condicoes-comerciais",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"condicoes-comerciais"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza condição comercial",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"produto\": 1,\r\n    \"tipoPagamento\": \"Depósito\",\r\n    \"faturamento\": \"Pós-pago\",\r\n    \"rede\": \"Rede aberta\",\r\n    \"saqueIncluso\": false,\r\n    \"saque\": 0,\r\n    \"apuracao\": 15,\r\n    \"pagamento\": 30,\r\n    \"tipoTaxa\": \"Real\",\r\n    \"taxa\": 0,\r\n    \"personalizacao\": 0,\r\n    \"limite\": 0,\r\n    \"adesao\": 0,\r\n    \"emissao\": 0,\r\n    \"segundaVia\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/condicoes-comerciais/84405479000136",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"condicoes-comerciais",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca condição comercial",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/condicoes-comerciais",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"condicoes-comerciais"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluí condição comercial",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"produto\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/condicoes-comerciais/84405479000136?produto=2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"condicoes-comerciais",
+										"84405479000136"
+									],
+									"query": [
+										{
+											"key": "produto",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Localização",
+					"item": [
+						{
+							"name": "Busca localizações",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/localizacoes/84405479000136",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"localizacoes",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza localização",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cep\": \"99999999\",\r\n    \"cidade\": \"Cianorte\",\r\n    \"uf\": \"PR\",\r\n    \"bairro\": \"Centro\",\r\n    \"numero\": \"999\",\r\n    \"endereco\": \"Rua 99999\",\r\n    \"complemento\": \"\",\r\n    \"coordenadas\": \"9999999999\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/localizacoes/84405479000136",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"localizacoes",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Representantes",
+					"item": [
+						{
+							"name": "Busca representantes",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/representantes/84405479000136",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"representantes",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra representante",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cliente\": \"01234567890127\",\r\n    \"nome\": \"Adam\",\r\n    \"cpf\": \"12345678912\",\r\n    \"testemunha\": \"true\",\r\n    \"contatoComercial\": false,\r\n    \"email\": \"adam@exemplo.com\",\r\n    \"telefone\": \"4499778844\",\r\n    \"cargo\": \"Diretor\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/representantes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"representantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza representante",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Adam\",\r\n    \"testemunha\": \"false\",\r\n    \"contatoComercial\": false,\r\n    \"email\": \"adam@exemplo.com\",\r\n    \"telefone\": \"4499778844\",\r\n    \"cargo\": \"Diretor presidente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/representantes/12345678912",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"representantes",
+										"12345678912"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluí representante",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/representantes/12345678912",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"representantes",
+										"12345678912"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Status",
+					"item": [
+						{
+							"name": "Busca status",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/status",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza status",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Desenvolvimento\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/status/84405479000136",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"status",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Justificativa",
+					"item": [
+						{
+							"name": "Cadastra justificativa",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cliente\": \"84405479000136\",\r\n    \"status\": \"Reprovado\",\r\n    \"justificativa\": \"Justificativa de exemplo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/justificativas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"justificativas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar justificativas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}credenciamentos/clientes/justificativas/84405479000136",
+									"host": [
+										"{{base_url}}credenciamentos"
+									],
+									"path": [
+										"clientes",
+										"justificativas",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exclui justificativa",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/clientes/justificativas/84405479000136",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"clientes",
+										"justificativas",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Remanejacao",
+					"item": [
+						{
+							"name": "Busca remanejacoes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}credenciamentos/clientes/remanejacoes/84405479000136",
+									"host": [
+										"{{base_url}}credenciamentos"
+									],
+									"path": [
+										"clientes",
+										"remanejacoes",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remanejar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"remanejado\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}credenciamentos/clientes/remanejacoes/84405479000136",
+									"host": [
+										"{{base_url}}credenciamentos"
+									],
+									"path": [
+										"clientes",
+										"remanejacoes",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Registros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}credenciamentos/clientes/registros/94571424000150",
+							"host": [
+								"{{base_url}}credenciamentos"
+							],
+							"path": [
+								"clientes",
+								"registros",
+								"94571424000150"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credencial",
+			"item": [
+				{
+					"name": "Identificação",
+					"item": [
+						{
+							"name": "Cadastra credencial",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"simplesNacional\": false,\r\n    \"cnpj\": \"55417763000124\",\r\n    \"razaoSocial\": \"Teste\",\r\n    \"inscricaoEstadual\": \"99998877\",\r\n    \"ramoAtividade\": \"Teste também\",\r\n    \"nomeFantasia\": \"Teste fantasia\",\r\n    \"telefone\": \"4499887766\",\r\n    \"email\": \"teste@teste.com\",\r\n    \"emailFinanceiro\": \"teste@teste.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/identificacoes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"identificacoes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca credencial",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/identificacoes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"identificacoes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Filial",
+					"item": [
+						{
+							"name": "Busca filial",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/filiais",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"filiais"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra filial",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"matriz\": \"94571424000150\",\r\n    \"filial\": \"53915746000191\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/filiais",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"filiais"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluí filial",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/filiais/01234567890127",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"filiais",
+										"01234567890127"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Condição Comercial",
+					"item": [
+						{
+							"name": "Cadastra condição comercial",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"credencial\": \"55417763000124\",\r\n    \"apuracao\": 15,\r\n    \"pagamento\": 5,\r\n    \"produto\": [\r\n        {\r\n            \"id\": 1,\r\n            \"taxa\": 2.5\r\n        }\r\n    ],\r\n    \"tarifa\": [\r\n        {\r\n            \"id\": 1,\r\n            \"valor\": 2,\r\n            \"valorMin\": 5,\r\n            \"valorMax\": 10,\r\n            \"carencia\": 10,\r\n            \"parcelas\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/condicoes-comerciais",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"condicoes-comerciais"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza condição comercial",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"apuracao\": 15,\r\n    \"pagamento\": 5,\r\n    \"produto\": [\r\n        {\r\n            \"id\": 1,\r\n            \"taxa\": 3\r\n        }\r\n    ],\r\n    \"tarifa\": [\r\n        {\r\n            \"id\": 1,\r\n            \"valor\": 5,\r\n            \"valorMin\": 10,\r\n            \"valorMax\": 25,\r\n            \"carencia\": 10,\r\n            \"parcelas\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/condicoes-comerciais/55417763000124",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"condicoes-comerciais",
+										"55417763000124"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca condição comercial",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/condicoes-comerciais",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"condicoes-comerciais"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluí condição comercial",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/condicoes-comerciais/55417763000124?item=Tarifa&itemId=1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"condicoes-comerciais",
+										"55417763000124"
+									],
+									"query": [
+										{
+											"key": "item",
+											"value": "Tarifa"
+										},
+										{
+											"key": "itemId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Localização",
+					"item": [
+						{
+							"name": "Busca localizações",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/localizacoes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"localizacoes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza localização",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cep\": \"99999999\",\r\n    \"cidade\": \"Cianorte\",\r\n    \"uf\": \"PR\",\r\n    \"bairro\": \"Centro\",\r\n    \"numero\": \"999\",\r\n    \"endereco\": \"Rua 99999\",\r\n    \"complemento\": \"\",\r\n    \"coordenadas\": \"9999999999\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/localizacoes/55417763000124",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"localizacoes",
+										"55417763000124"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Representantes",
+					"item": [
+						{
+							"name": "Busca representantes",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/representantes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"representantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra representante",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"credencial\": \"55417763000124\",\r\n    \"nome\": \"Adam\",\r\n    \"cpf\": \"12345678912\",\r\n    \"testemunha\": \"false\",\r\n    \"contatoComercial\": false,\r\n    \"email\": \"adam@exemplo.com\",\r\n    \"telefone\": \"4499778844\",\r\n    \"cargo\": \"Diretor\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/representantes",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"representantes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza representante",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Adam\",\r\n    \"testemunha\": \"true\",\r\n    \"contatoComercial\": false,\r\n    \"email\": \"adam@exemplo.com\",\r\n    \"telefone\": \"4499778844\",\r\n    \"cargo\": \"Diretor presidente\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/representantes/12345678912",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"representantes",
+										"12345678912"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluí representante",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/representantes/12345678912",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"representantes",
+										"12345678912"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tecnologia",
+					"item": [
+						{
+							"name": "Busca tecnologias",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/tecnologias",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"tecnologias"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastra tecnologia",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"credencial\": \"55417763000124\",\r\n    \"idEquipamento\": 2,\r\n    \"cnpjEquipamento\": \"55417763000124\",\r\n    \"ecEquipamento\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/tecnologias",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"tecnologias"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza tecnologia",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEquipamento\": 2,\r\n    \"cnpjEquipamento\": \"55417763000124\",\r\n    \"ecEquipamento\": \"0001\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/tecnologias/55417763000124",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"tecnologias",
+										"55417763000124"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluí tecnologia",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/tecnologias/55417763000124?equipamento=2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"tecnologias",
+										"55417763000124"
+									],
+									"query": [
+										{
+											"key": "equipamento",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Status",
+					"item": [
+						{
+							"name": "Busca status",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/status",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Status",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Desenvolvimento\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/status/84405479000136",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"status",
+										"84405479000136"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Justificativa",
+					"item": [
+						{
+							"name": "Cadastra justificativa",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"credencial\": \"55417763000124\",\r\n    \"status\": \"Reprovado\",\r\n    \"justificativa\": \"Justificativa de exemplo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/justificativas",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"justificativas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar justificativas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}credenciamentos/credenciais/justificativas",
+									"host": [
+										"{{base_url}}credenciamentos"
+									],
+									"path": [
+										"credenciais",
+										"justificativas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exclui justificativa",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/credenciamentos/credenciais/justificativas/55417763000124",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"credenciamentos",
+										"credenciais",
+										"justificativas",
+										"55417763000124"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Remanejacao",
+					"item": [
+						{
+							"name": "Busca remanejacoes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}credenciamentos/credenciais/remanejacoes",
+									"host": [
+										"{{base_url}}credenciamentos"
+									],
+									"path": [
+										"credenciais",
+										"remanejacoes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remanejar",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"remanejado\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}credenciamentos/credenciais/remanejacoes/55417763000124",
+									"host": [
+										"{{base_url}}credenciamentos"
+									],
+									"path": [
+										"credenciais",
+										"remanejacoes",
+										"55417763000124"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Registros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}credenciamentos/credenciais/registros/55417763000124",
+							"host": [
+								"{{base_url}}credenciamentos"
+							],
+							"path": [
+								"credenciais",
+								"registros",
+								"55417763000124"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api/"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXN1YXJpbyI6InJveHkuYWRtaW4iLCJub21lIjoiUm94eSBBZG1pbnN0cmFkb3IiLCJpYXQiOjE3MzIxODcyNzYsImV4cCI6MTczMjIzMDQ3Nn0.7eePqLwersqGG493CwHAOGKPHFKU1CXqahJ-ITBWp2w",
+			"type": "string"
+		}
+	]
+}

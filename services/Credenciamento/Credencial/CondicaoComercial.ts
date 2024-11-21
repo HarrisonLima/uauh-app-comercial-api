@@ -6,7 +6,7 @@ const insertCredCondicaoComercial = async (req: any): Promise<any> => {
   const condicaoComercial = new CondicaoComercialModel(
     req[0].credencial,
     req[0].apuracao,
-    req[0].fechamento,
+    req[0].pagamento,
     req[0].produto,
     req[0].tarifa
   );
@@ -36,7 +36,7 @@ const updateCredCondicaoComercial = async (
   const condicaoComercial = new CondicaoComercialModel(
     req[0].credencial,
     req[0].apuracao,
-    req[0].fechamento,
+    req[0].pagamento,
     req[0].produto,
     req[0].tarifa
   );
@@ -51,13 +51,13 @@ const deleteCredCondicaoComercial = async (
   cnpj: string,
   req: any
 ): Promise<any> => {
-  const item_id = req[0];
-  const tipo_item = req[1];
+  const item = req[0];
+  const itemId = req[1];
   const userId = req[2];
   const condicaoComercial =
     await CondicacaoComercialCredRepository.deleteCondicaoComercial(cnpj, [
-      item_id,
-      tipo_item,
+      item,
+      itemId,
       userId,
     ]);
   return condicaoComercial;

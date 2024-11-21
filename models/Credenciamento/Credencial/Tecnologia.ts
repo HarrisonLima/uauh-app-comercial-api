@@ -3,9 +3,9 @@ import ITecnologia from "./../../../interfaces/Credenciamento/Credencial/Tecnolo
 class Tecnologia implements ITecnologia {
   constructor(
     public credencial: string | number,
-    public equipamento_id: number,
-    public cnpj_equipamento: number,
-    public ec_equipamento: number
+    public idEquipamento: number,
+    public cnpjEquipamento: number,
+    public ecEquipamento: number
   ) {}
 }
 

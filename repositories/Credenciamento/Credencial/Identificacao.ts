@@ -11,7 +11,7 @@ const insertIdentificacao = async (req: any, res: any): Promise<any> => {
 
     if (isValid) {
       query =
-        "INSERT INTO credenciais.credenciais (simples_nacional, cnpj, razao_social, inscricao_estadual, ramo_atividade, nome_fantasia, telefone, email, email_financeiro) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;";
+        "INSERT INTO credenciais.credenciais (simples_nacional, cnpj, razao_social, inscricao_estadual, ramo_atividade, nome_fantasia, telefone, email, email_financeiro) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;";
       values = [
         identificacao.simplesNacional,
         identificacao.cnpj,
@@ -65,9 +65,9 @@ const insertIdentificacao = async (req: any, res: any): Promise<any> => {
         console.log(registroFilial.rows);
       }
 
-      return registro;
+      return registro.rows;
     } else {
-      res.status(409).json("Cliente já cadastrado");
+      res.status(409).json("Credencial já cadastrado");
     }
   } catch (error: any) {
     console.error("Error: ", error);
@@ -154,7 +154,7 @@ const updateIdentificacao = async (cnpj: string, req: any, res: any) => {
     const registro = await db.query(query, values);
     console.log("Registro: ", registro.rows);
 
-    return registro;
+    return registro.rows;
   } catch (error: any) {
     console.error("Error: ", error);
     res.status(500).json({ error });

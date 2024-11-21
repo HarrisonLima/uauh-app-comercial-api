@@ -29,7 +29,6 @@ const selectCredRemanejacao = async (req: any, res: any): Promise<any> => {
 const updateCredRemanejacao = async (req: any, res: any): Promise<any> => {
   const cnpj = req.params.cnpj;
 
-  console.log(cnpj, req.body);
   try {
     const resultado = await RemanejacaoCredServices.updateCredRemanejacao(cnpj, [
       req.body,

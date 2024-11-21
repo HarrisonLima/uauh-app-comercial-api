@@ -2,7 +2,7 @@ import db from "../../../database";
 
 const getLocalizacoes = async (_: any, res: any): Promise<any | undefined> => {
   try {
-    const query = `SELECT credenciais.cnpj AS "CNPJ", credenciais.nome_fantasia AS "Nome fantasia", credencial_localizacao.cep AS "CEP", credencial_localizacao.cidade AS "Cidade", credencial_localizacao.uf AS "UF", credencial_localizacao.bairro AS "Bairro", credencial_localizacao.numero AS "Número", credencial_localizacao.endereco AS "Endereço", credencial_localizacao.complemento AS "Complemento" FROM credenciais.credencial_localizacao JOIN credenciais.credenciais ON credencial_localizacao.credencial_id = credenciais.id  
+    const query = `SELECT credenciais.cnpj AS "CNPJ", credenciais.nome_fantasia AS "Nome fantasia", credencial_localizacao.cep AS "CEP", credencial_localizacao.cidade AS "Cidade", credencial_localizacao.uf AS "UF", credencial_localizacao.bairro AS "Bairro", credencial_localizacao.numero AS "Número", credencial_localizacao.endereco AS "Endereço", credencial_localizacao.complemento AS "Complemento", credencial_localizacao.coordenadas AS "Coordenadas" FROM credenciais.credencial_localizacao JOIN credenciais.credenciais ON credencial_localizacao.credencial_id = credenciais.id  
     ORDER BY credenciais.nome_fantasia ASC;`;
     const { rows } = await db.query(query);
 
@@ -16,7 +16,7 @@ const getLocalizacoes = async (_: any, res: any): Promise<any | undefined> => {
 
 const selectLocalizacao = async (cnpj: string, res: any): Promise<any> => {
   try {
-    const query = `SELECT credenciais.cnpj AS "CNPJ", credenciais.nome_fantasia AS "Nome fantasia", credencial_localizacao.cep AS "CEP", credencial_localizacao.cidade AS "Cidade", credencial_localizacao.uf AS "UF", credencial_localizacao.bairro AS "Bairro", credencial_localizacao.numero AS "Número", credencial_localizacao.endereco AS "Endereço", credencial_localizacao.complemento AS "Complemento" FROM credenciais.credencial_localizacao JOIN credenciais.credenciais ON credencial_localizacao.credencial_id = credenciais.id  
+    const query = `SELECT credenciais.cnpj AS "CNPJ", credenciais.nome_fantasia AS "Nome fantasia", credencial_localizacao.cep AS "CEP", credencial_localizacao.cidade AS "Cidade", credencial_localizacao.uf AS "UF", credencial_localizacao.bairro AS "Bairro", credencial_localizacao.numero AS "Número", credencial_localizacao.endereco AS "Endereço", credencial_localizacao.complemento AS "Complemento", credencial_localizacao.coordenadas AS "Coordenadas" FROM credenciais.credencial_localizacao JOIN credenciais.credenciais ON credencial_localizacao.credencial_id = credenciais.id  
     WHERE credenciais.cnpj = $1;
     ;`;
     const values = [cnpj];
@@ -50,6 +50,7 @@ const updateLocalizacao = async (cnpj: string, req: any, res: any) => {
       cnpj,
     ];
 
+
     item = await db.query(query, values);
     
     const data = [
@@ -66,7 +67,7 @@ const updateLocalizacao = async (cnpj: string, req: any, res: any) => {
     ];
 
     query =
-      "INSERT INTO credenciais.registros_clientes (usuario_id, credencial_id, credencial_item, operacao, etapa_credenciamento) VALUES ($1, $2, $3, $4, $5) RETURNING *;";
+      "INSERT INTO credenciais.registros_credenciais (usuario_id, credencial_id, credencial_item, operacao, etapa_credenciamento) VALUES ($1, $2, $3, $4, $5) RETURNING *;";
     values = [userId, item.rows[0]['credencial_id'], data, "Atualizado", "Localização"];
 
     const registro = await db.query(query, values);

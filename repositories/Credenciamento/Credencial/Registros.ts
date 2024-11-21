@@ -83,9 +83,38 @@ ORDER BY
       ["Data"]: moment(row["Data"]).format("HH:mm:ss - DD/MM/YYYY"),
     }));
 
+    query = `SELECT 
+    credenciais.cnpj AS "CNPJ", 
+    credenciais.nome_fantasia AS "Nome fantasia", 
+    usuarios.nome AS "Nome",
+    usuarios.usuario AS "Usuário", 
+    status.status AS "Status",
+    registros_credenciais_justificativas.justificativa,
+    registros_credenciais_justificativas.data AS "Data" 
+FROM 
+    credenciais.registros_credenciais_justificativas
+JOIN 
+    credenciais.credenciais ON registros_credenciais_justificativas.credencial_id = credenciais.id
+JOIN 
+    cadastros.usuarios ON registros_credenciais_justificativas.usuario_id = usuarios.id
+JOIN 
+    cadastros.status ON registros_credenciais_justificativas.status_id = status.id
+ORDER BY 
+    registros_credenciais_justificativas.data DESC;`;
+
+    const justificativa = await db.query(query);
+
+    const justificativaRows = justificativa.rows.map((row: any) => ({
+      ["Usuário"]: `${row["Nome"]} (${row["Usuário"]})`,
+      ["Status"]: row["Status"],
+      ["Justificativa"]: row["Justificativa"],
+      ["Data"]: moment(row["Data"]).format("HH:mm:ss - DD/MM/YYYY"),
+    }));
+
     return [
       { credenciamento: credenciamentoRows },
       { status: statusRows },
+      { justificativa: justificativaRows },
       { remanejamento: remanejamentoRows },
     ];
   } catch (error: any) {
@@ -99,7 +128,7 @@ const selectRegistros = async (cnpj: string, res: any): Promise<any> => {
   let query, values;
 
   try {
-    query = `SELECT usuarios.nome AS "Nome",
+    query = `SELECT credenciais.cnpj AS "CNPJ", credenciais.nome_fantasia AS "Nome fantasia", usuarios.nome AS "Nome",
     usuarios.usuario AS "Usuário", registros_credenciais.credencial_item AS "Item", registros_credenciais.operacao AS "Operação", registros_credenciais.etapa_credenciamento AS "Etapa", registros_credenciais.data AS "Data" 
     FROM credenciais.registros_credenciais 
     JOIN 
@@ -120,7 +149,7 @@ JOIN
       ["Data"]: moment(row["Data"]).format("HH:mm:ss - DD/MM/YYYY"),
     }));
 
-    query = `SELECT usuarios.nome AS "Nome",
+    query = `SELECT credenciais.cnpj AS "CNPJ", credenciais.nome_fantasia AS "Nome fantasia", usuarios.nome AS "Nome",
     usuarios.usuario AS "Usuário", status.status AS "Status", registros_credenciais_status.data AS "Data" 
     FROM credenciais.registros_credenciais_status 
     JOIN 
@@ -151,13 +180,21 @@ JOIN
         ["Data"]: moment(row["Data"]).format("HH:mm:ss - DD/MM/YYYY"),
       }));
 
-    query = `SELECT usuarios.nome AS "Nome", usuarios.usuario AS "Usuário", status.status AS "Status", registros_credenciais_justificativas.justificativa AS "Justificativa", registros_credenciais_justificativas.data AS "Data" 
-    FROM credenciais.registros_credenciais_justificativas
-    JOIN 
+    query = `SELECT 
+    credenciais.cnpj AS "CNPJ", 
+    credenciais.nome_fantasia AS "Nome fantasia", 
+    usuarios.nome AS "Nome",
+    usuarios.usuario AS "Usuário", 
+    status.status AS "Status",
+    registros_credenciais_justificativas.justificativa,
+    registros_credenciais_justificativas.data AS "Data" 
+FROM 
+    credenciais.registros_credenciais_justificativas
+JOIN 
     credenciais.credenciais ON registros_credenciais_justificativas.credencial_id = credenciais.id
-    JOIN 
+JOIN 
     cadastros.usuarios ON registros_credenciais_justificativas.usuario_id = usuarios.id
-    JOIN 
+JOIN 
     cadastros.status ON registros_credenciais_justificativas.status_id = status.id
     WHERE credenciais.cnpj = $1
     ORDER BY 
@@ -173,6 +210,8 @@ JOIN
     }));
 
     query = `SELECT 
+    credenciais.cnpj AS "CNPJ", 
+    credenciais.nome_fantasia AS "Nome fantasia", 
     usuarios_remanejador.nome AS "Nome remanejador",
     usuarios_remanejador.usuario AS "Remanejador",
     usuarios_remanejado.nome AS "Nome remanejado",
